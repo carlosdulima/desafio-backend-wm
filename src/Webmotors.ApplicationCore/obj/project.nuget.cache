@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "dgSpecHash": "ibUTHZQx/VRGTD/MDmHFilWTt3wAkp5dEEwZPAdxfSRR5xXGEn3ifhbxViFVsPLau3xGtUKNvImYjwatQWmXqw==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\carlo\\source\\repos\\Webmotors\\src\\Webmotors.ApplicationCore\\Webmotors.ApplicationCore.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\carlo\\.nuget\\packages\\microsoft.extensions.configuration\\5.0.0\\microsoft.extensions.configuration.5.0.0.nupkg.sha512",
+    "C:\\Users\\carlo\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\5.0.0\\microsoft.extensions.configuration.abstractions.5.0.0.nupkg.sha512",
+    "C:\\Users\\carlo\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\5.0.2\\microsoft.extensions.dependencyinjection.5.0.2.nupkg.sha512",
+    "C:\\Users\\carlo\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\5.0.0\\microsoft.extensions.dependencyinjection.abstractions.5.0.0.nupkg.sha512",
+    "C:\\Users\\carlo\\.nuget\\packages\\microsoft.extensions.primitives\\5.0.0\\microsoft.extensions.primitives.5.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}

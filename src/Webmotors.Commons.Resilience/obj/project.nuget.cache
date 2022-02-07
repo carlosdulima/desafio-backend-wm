@@ -1,0 +1,16 @@
+{
+  "version": 2,
+  "dgSpecHash": "wkHKKU6+Bh3m7Edqkv2USNiosnkBP8fSe3gPO3L7CxOHge8yTvU0BAyDo5/PbVzm5UCD5PlzduD0hrmyuP31HQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\carlo\\source\\repos\\Webmotors\\src\\Webmotors.Commons.Resilience\\Webmotors.Commons.Resilience.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\carlo\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\5.0.0\\microsoft.extensions.dependencyinjection.5.0.0.nupkg.sha512",
+    "C:\\Users\\carlo\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\5.0.0\\microsoft.extensions.dependencyinjection.abstractions.5.0.0.nupkg.sha512",
+    "C:\\Users\\carlo\\.nuget\\packages\\microsoft.extensions.logging\\5.0.0\\microsoft.extensions.logging.5.0.0.nupkg.sha512",
+    "C:\\Users\\carlo\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\5.0.0\\microsoft.extensions.logging.abstractions.5.0.0.nupkg.sha512",
+    "C:\\Users\\carlo\\.nuget\\packages\\microsoft.extensions.options\\5.0.0\\microsoft.extensions.options.5.0.0.nupkg.sha512",
+    "C:\\Users\\carlo\\.nuget\\packages\\microsoft.extensions.primitives\\5.0.0\\microsoft.extensions.primitives.5.0.0.nupkg.sha512",
+    "C:\\Users\\carlo\\.nuget\\packages\\polly\\7.2.2\\polly.7.2.2.nupkg.sha512"
+  ],
+  "logs": []
+}

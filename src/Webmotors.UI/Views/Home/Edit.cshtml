@@ -1,0 +1,230 @@
+﻿@{
+    ViewData["Title"] = "Alterar Anúncio";
+}
+<div class="text-center">
+    <h2>Alterar Anúncio</h2>
+    <hr />
+</div>
+<div class="container col-xl-8 col-lg-8">
+    <form class="row justify-content-md-center">
+        <div class="form-row col-12">
+            <div class="col-12 col-sm-6">
+                <div class="form-group">
+                    <label for="selectMake">Marca</label>
+                    <select class="form-control" id="selectMake" name="selectMake" place disabled required>
+                        <option selected value="">Selecione...</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6">
+                <div class="form-group">
+                    <label for="selectModel">Modelo</label>
+                    <select class="form-control" id="selectModel" name="selectModel" disabled required>
+                        <option selected value="">Selecione a Marca...</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="form-row col-12">
+            <div class="col-12">
+                <div class="form-group">
+                    <label for="selectVersion">Versão</label>
+                    <select class="form-control" id="selectVersion" name="selectVersion" disabled required>
+                        <option selected value="">Selecione o Modelo...</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="form-row col-12">
+            <div class="col-12 col-sm-6">
+                <div class="form-group">
+                    <label for="year">Ano</label>
+                    <input type="number" class="form-control" id="year" required>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6">
+                <div class="form-group">
+                    <label for="km">KM (Quilometragem)</label>
+                    <input type="number" class="form-control" id="km" required>
+                </div>
+            </div>
+        </div>
+        <div class="form-row col-12">
+            <div class="col-12">
+                <div class="form-group">
+                    <label for="notes">Observação</label>
+                    <textarea rows="3" class="form-control" id="notes" required></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="form-row col-12">
+            <div class="col-12 text-center">
+                <a href="/" class="btn btn-info mr-2">Cancelar</a>
+                <button type="submit" class="btn btn-danger">Salvar Alterações</button>
+            </div>
+        </div>
+    </form>
+</div>
+@section Scripts {
+    <script type="text/javascript">
+        $.ajax({
+            url: "/Home/ReturnJsonAd?id=" + $(location).attr("href").split('/').pop(),
+            type: "GET",
+            contentType: "application/json; charset=utf-8",
+            datatype: JSON,
+            success: function (result) {
+                $(result).each(function () {
+                    LoadSelectMake(this.make, this.model, this.version);
+                    $("#year").val(this.yearModel);
+                    $("#km").val(this.km);
+                    $("#notes").val(this.note);
+                });
+            },
+            error: function (data) { }
+        });
+
+        function LoadSelectMake(makeSelected, modelSelected, versionSelected) {
+            $.ajax({
+                url: "/Home/ReturnJsonMake",
+                type: "GET",
+                contentType: "application/json; charset=utf-8",
+                datatype: JSON,
+                success: function (result) {
+                    $(result).each(function () {
+                        $("#selectMake").append($("<option></option>").val(this.id).html(this.name));
+                    });
+                    $("#selectMake").attr("disabled", false);
+                    $("#selectMake option:contains(" + makeSelected + ")").attr('selected', 'selected');
+                    LoadSelectModel($("#selectMake").val(), modelSelected, versionSelected);
+                },
+                error: function (data) { }
+            });
+        }
+
+        function LoadSelectModel(makeId, modelSelected, versionSelected) {
+            $.ajax({
+                url: "/Home/ReturnJsonModel?makeId=" + makeId,
+                type: "GET",
+                contentType: "application/json; charset=utf-8",
+                datatype: JSON,
+                beforeSend: function (result) {
+                    $("#selectModel").find('option').not(':first').remove();
+                    $("#selectModel").attr("disabled", true);
+                },
+                success: function (result) {
+                    $(result).each(function () {
+                        $("#selectModel").append($("<option></option>").val(this.id).html(this.name));
+                    });
+                    $("#selectModel").attr("disabled", false);
+                    $("#selectModel option:contains(" + modelSelected + ")").attr('selected', 'selected');
+                    LoadSelectVersion($("#selectModel").val(), versionSelected);
+                },
+                error: function (data) { }
+            });
+        }
+
+        function LoadSelectVersion(modelId, versionSelected) {
+            $.ajax({
+                url: "/Home/ReturnJsonVersion?modelId=" + modelId,
+                type: "GET",
+                contentType: "application/json; charset=utf-8",
+                datatype: JSON,
+                beforeSend: function (result) {
+                    $("#selectVersion").find('option').not(':first').remove();
+                    $("#selectVersion").attr("disabled", true);
+                },
+                success: function (result) {
+                    $(result).each(function () {
+                        $("#selectVersion").append($("<option></option>").val(this.id).html(this.name));
+                    });
+                    $("#selectVersion").attr("disabled", false);
+                    $("#selectVersion option:contains(" + versionSelected + ")").attr('selected', 'selected');
+                },
+                error: function (data) { }
+            });
+        }
+
+        $("#selectMake").change(function () {
+            if ($("#selectMake").val() > 0) {
+                $.ajax({
+                    url: "/Home/ReturnJsonModel?makeId=" + $("#selectMake").val(),
+                    type: "GET",
+                    contentType: "application/json; charset=utf-8",
+                    datatype: JSON,
+                    beforeSend: function (result) {
+                        $("#selectModel").find('option').not(':first').remove();
+                        $("#selectModel").attr("disabled", true);
+                    },
+                    success: function (result) {
+                        $(result).each(function () {
+                            $("#selectModel").append($("<option></option>").val(this.id).html(this.name));
+                        });
+                        $("#selectModel").attr("disabled", false);
+                    },
+                    error: function (data) { }
+                });
+            }
+            else {
+                 $("#selectModel").find('option').not(':first').remove();
+            }
+        });
+
+        $("#selectModel").change(function () {
+            if ($("#selectModel").val() > 0) {
+                $.ajax({
+                    url: "/Home/ReturnJsonVersion?modelId=" + $("#selectModel").val(),
+                    type: "GET",
+                    contentType: "application/json; charset=utf-8",
+                    datatype: JSON,
+                    beforeSend: function (result) {
+                        $("#selectVersion").find('option').not(':first').remove();
+                        $("#selectVersion").attr("disabled", true);
+                    },
+                    success: function (result) {
+                        $(result).each(function () {
+                            $("#selectVersion").append($("<option></option>").val(this.id).html(this.name));
+                        });
+                        $("#selectVersion").attr("disabled", false);
+                    },
+                    error: function (data) { }
+                });
+            }
+            else {
+                 $("#selectVersion").find('option').not(':first').remove();
+            }
+        });
+
+        $("form").submit(function (event) {
+            var formData = {
+                id: $(location).attr("href").split('/').pop(),
+                make: $("#selectMake option:selected").text(),
+                model: $("#selectModel option:selected").text(),
+                version: $("#selectVersion option:selected").text(),
+                yearModel: $("#year").val(),
+                km: $("#km").val(),
+                note: $("#notes").val(),
+            };
+
+            $.ajax({
+                type: "POST",
+                url: "/Home/ChangeAd",
+                data: formData,
+                dataType: "json",
+                beforeSend: function (result) {
+                    $('button[type="submit"]').attr("disabled", true);
+                },
+                success: function () {
+                    window.location.href = "/";
+                },
+                error: function (jqXHR) {
+                    alert(jqXHR.responseText);
+                },
+                complete: function () {
+                    $('button[type="submit"]').attr("disabled", false);
+                }
+            });
+
+            event.preventDefault();
+        });
+    </script>
+}
