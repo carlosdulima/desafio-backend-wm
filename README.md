@@ -1,7 +1,6 @@
 - Utilizei arquitetura hexagonal seguindo principios de clean code e solid
 
-- Não me preocupei muito com o front, mas fiz pelo menos o básico, se soubesse que no asp.net mvc daria tanto
-  trabalho, teria feito no angular, mas quis fazer aqui para evitar conflitos de versões de npm e angularcli 
+- Não me preocupei muito com o front, mas fiz pelo menos o básico, fiz em asp,net mvc para evitar conflitos de versões de npm e angularcli 
   e usei com jquery ajax
 
 - Utilizei chamadas REST com Refit usando Polly como resiliência
